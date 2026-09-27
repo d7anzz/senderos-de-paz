@@ -1,0 +1,321 @@
+:host {
+  display: block;
+}
+
+/* Centrado del contenedor */
+.container {
+  max-width: 1140px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  box-sizing: border-box;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mb-4 {
+  margin-bottom: 2.5rem;
+}
+.about-page {
+  background-color: var(--bg-soft, #f8fafc);
+  min-height: 80vh;
+  padding-bottom: 5rem;
+}
+
+.about-hero-header {
+  background: linear-gradient(180deg, var(--primary-dark, #0e223d) 0%, var(--primary-navy, #163763) 100%);
+  color: #ffffff;
+  padding: 4.5rem 1.5rem;
+}
+
+.badge-title {
+  color: var(--accent-gold, #c5a059);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  display: inline-block;
+  margin-bottom: 0.75rem;
+}
+
+.about-hero-header h1 {
+  font-size: 2.6rem;
+  font-weight: 800;
+  margin: 0 0 1rem 0;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  color: #cbd5e1;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+.content-wrapper {
+  margin-top: -2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.intro-block {
+  background: #ffffff;
+  border-radius: 8px;
+  border: 1px solid var(--border, #e2e8f0);
+  padding: 2.5rem;
+  box-shadow: 0 4px 16px rgba(22, 55, 99, 0.05);
+  margin-bottom: 3rem;
+}
+
+.intro-block h2 {
+  color: var(--primary-navy, #163763);
+  font-size: 1.8rem;
+  margin-top: 0;
+  margin-bottom: 1.25rem;
+}
+
+.intro-block p {
+  color: var(--text-main, #334155);
+  font-size: 1.05rem;
+  line-height: 1.75;
+  margin-bottom: 1rem;
+}
+
+.mv-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3.5rem;
+}
+
+.mv-card {
+  background: #ffffff;
+  border-radius: 8px;
+  border: 1px solid var(--border, #e2e8f0);
+  border-left: 5px solid var(--accent-gold, #c5a059);
+  padding: 2.25rem;
+  box-shadow: 0 4px 12px rgba(22, 55, 99, 0.03);
+}
+
+.mv-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.mv-icon { font-size: 1.6rem; }
+
+.mv-header h3 {
+  color: var(--primary-navy, #163763);
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.mv-card p {
+  color: var(--text-muted, #64748b);
+  line-height: 1.65;
+  margin: 0;
+}
+
+.pillars-section h2 {
+  color: var(--primary-navy, #163763);
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3.5rem;
+}
+
+.pillar-card {
+  background: #ffffff;
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: 8px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.pillar-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(22, 55, 99, 0.07);
+}
+
+.pillar-icon {
+  font-size: 2.2rem;
+  margin-bottom: 0.8rem;
+}
+
+.pillar-card h4 {
+  color: var(--primary-navy, #163763);
+  font-size: 1.15rem;
+  margin: 0 0 0.5rem 0;
+}
+
+.pillar-card p {
+  color: var(--text-muted, #64748b);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.cta-banner {
+  background: linear-gradient(135deg, var(--primary-navy, #163763) 0%, var(--primary-dark, #0e223d) 100%);
+  color: #ffffff;
+  border-radius: 8px;
+  padding: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.cta-text h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.4rem;
+}
+
+.cta-text p {
+  margin: 0;
+  color: #cbd5e1;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .about-hero-header h1 { font-size: 2rem; }
+  .cta-banner { text-align: center; justify-content: center; }
+  .cta-buttons { justify-content: center; width: 100%; }
+}
+
+/* ==========================================================================
+   Sección Convenios con Camposantos (Formato Logotipos)
+   ========================================================================== */
+.cemeteries-section {
+  margin-bottom: 4.5rem;
+}
+
+.section-desc {
+  max-width: 720px;
+  margin: 0.5rem auto 2.5rem;
+  color: var(--text-muted, #64748b);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+/* Grilla fija de 4 columnas en pantallas de escritorio */
+.cemeteries-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.cemetery-card {
+  background: #ffffff;
+  border-radius: 10px;
+  border: 1px solid var(--border, #e2e8f0);
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(22, 55, 99, 0.04);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.cemetery-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(22, 55, 99, 0.08);
+}
+
+/* Área para logos con fondo blanco y padding controlado */
+.cemetery-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 130px;
+  background-color: #ffffff;
+  border-bottom: 1px solid var(--border, #e2e8f0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  box-sizing: border-box;
+}
+
+/* Ajusta los logotipos completos sin cortes */
+.cemetery-img-wrap img {
+  max-width: 85%;
+  max-height: 65px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  transition: transform 0.25s ease;
+}
+
+.cemetery-card:hover .cemetery-img-wrap img {
+  transform: scale(1.05);
+}
+
+/* Distintivo de convenio discreto */
+.cemetery-tag {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: #f8fafc;
+  color: var(--primary-navy, #163763);
+  border: 1px solid var(--border, #e2e8f0);
+  padding: 0.2rem 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  border-radius: 4px;
+}
+
+.cemetery-body {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.cemetery-location {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent-gold, #c5a059);
+  margin-bottom: 0.35rem;
+}
+
+.cemetery-body h3 {
+  font-size: 1.1rem;
+  color: var(--primary-navy, #163763);
+  margin: 0 0 0.5rem 0;
+  font-weight: 700;
+}
+
+.cemetery-body p {
+  font-size: 0.88rem;
+  color: var(--text-muted, #64748b);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Ajuste responsive para tablets y móviles */
+@media (max-width: 1024px) {
+  .cemeteries-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .cemeteries-grid {
+    grid-template-columns: 1fr;
+  }
+}

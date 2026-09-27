@@ -1,0 +1,121 @@
+<section class="about-page">
+  <!-- Banner Superior de la Página -->
+  <header class="about-hero-header">
+    <div class="container text-center">
+      <span class="badge-title">Nuestra Trayectoria</span>
+      <h1>Sobre Funeraria Senderos de Paz</h1>
+      <p class="hero-subtitle">
+        Acompañamiento digno, humano y profesional las 24 horas del día.
+      </p>
+    </div>
+  </header>
+
+  <div class="container content-wrapper">
+    <!-- Historia e Introducción -->
+    <div class="intro-block">
+      <h2>Vocación de Servicio y Calidez Familiar</h2>
+      <p>
+        Funeraria Senderos de Paz nace con el compromiso de brindar respaldo integral a las familias en sus momentos más difíciles. Entendemos que enfrentar la pérdida de un ser querido demanda respeto absoluto, agilidad y transparencia.
+      </p>
+      <p>
+        Por ello, centralizamos todas las necesidades del servicio funerario: desde los trámites legales y de sanidad hasta la ceremonia de despedida, permitiendo que la familia se concentre en el recogimiento y la unión familiar.
+      </p>
+    </div>
+
+    <!-- Misión y Visión -->
+    <div class="mv-grid">
+      <div class="mv-card">
+        <div class="mv-header">
+          <span class="mv-icon">🌿</span>
+          <h3>Nuestra Misión</h3>
+        </div>
+        <p>
+          Aliviar la carga emocional y logística de las familias mediante una atención oportuna, respetuosa y transparente, velando por la dignidad en el homenaje final de cada ser querido.
+        </p>
+      </div>
+
+      <div class="mv-card">
+        <div class="mv-header">
+          <span class="mv-icon">🏛️</span>
+          <h3>Nuestra Visión</h3>
+        </div>
+        <p>
+          Ser la institución de referencia en servicios exequiales y planes de previsión por nuestra excelencia operativa, ética profesional y sensibilidad humana incondicional.
+        </p>
+      </div>
+    </div>
+
+    <!-- Pilares institucionales -->
+    <div class="pillars-section">
+      <h2 class="text-center mb-4">¿Por qué confiar en nosotros?</h2>
+      <div class="pillars-grid">
+        <div class="pillar-card">
+          <div class="pillar-icon">⚖️</div>
+          <h4>Gestión Legal Oportuna</h4>
+          <p>Asesoramiento y tramitación inmediata ante RENIEC, clínicas y entidades de salud pública.</p>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-icon">🕊️</div>
+          <h4>Capillas de Velación</h4>
+          <p>Espacios privados, climatizados y pensados para el descanso y la privacidad de su familia.</p>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-icon">🚘</div>
+          <h4>Flota Moderna y Segura</h4>
+          <p>Carrozas panorámicas de alta gama y buses de acompañamiento con capacidad de hasta 24 personas.</p>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-icon">🤝</div>
+          <h4>Guardia Permanente</h4>
+          <p>Equipo operativo y conductores activos las 24 horas, los 365 días del año sin excepción.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sección Convenios con Camposantos -->
+    <section class="cemeteries-section">
+      <div class="text-center mb-4">
+        <span class="badge-title">Alianzas Estratégicas</span>
+        <h2>Convenios con Camposantos y Parques Cementerios</h2>
+        <p class="section-desc">
+          Mantenemos convenios institucionales con los principales camposantos del país, facilitando la gestión de sepulturas, traslados y trámites de cremación sin demoras.
+        </p>
+      </div>
+
+      <div class="cemeteries-grid">
+        @for (item of cemeteries; track item.name) {
+          <article class="cemetery-card">
+            <div class="cemetery-img-wrap">
+              <img [src]="item.image" [alt]="item.name" loading="lazy" />
+              <span class="cemetery-tag">Convenio Activo</span>
+            </div>
+            <div class="cemetery-body">
+              <div class="cemetery-location">📍 {{ item.location }}</div>
+              <h3>{{ item.name }}</h3>
+              <p>{{ item.description }}</p>
+            </div>
+          </article>
+        }
+      </div>
+    </section>
+
+    <!-- Llamado a la acción -->
+    <div class="cta-banner">
+      <div class="cta-text">
+        <h3>Atención inmediata y personalizada</h3>
+        <p>Si necesita orientación o coordinar un servicio de urgencia, comuníquese con nosotros ahora mismo.</p>
+      </div>
+      <div class="cta-buttons">
+        <a [href]="'tel:' + phone" class="btn-primary-action">
+          📞 Llamar al {{ phoneFormatted }}
+        </a>
+        <a routerLink="/" fragment="paquetes" class="btn-secondary-action">
+          Ver Paquetes
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

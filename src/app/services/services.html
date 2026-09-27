@@ -1,0 +1,48 @@
+<section class="services-page">
+  <!-- Cabecera de la página -->
+  <header class="services-hero-header">
+    <div class="container text-center">
+      <span class="badge-title">Cobertura Integral 24 Horas</span>
+      <h1>Nuestros Servicios</h1>
+      <p class="hero-subtitle">
+        Paquetes de sepelio, traslados nacionales e internacionales, exhumaciones y asistencia familiar en momentos difíciles.
+      </p>
+    </div>
+  </header>
+
+  <!-- Cuadrícula de tarjetas con foto y nombre -->
+  <div class="container content-wrapper">
+    <div class="services-grid">
+      @for (item of services; track item.id) {
+        <a [routerLink]="item.routePath" class="service-card" [attr.aria-label]="item.name">
+          <div class="service-img-wrap">
+            <img [src]="item.image" [alt]="item.name" loading="lazy" />
+            <div class="service-img-overlay"></div>
+            @if (item.badge) {
+              <span class="service-badge">{{ item.badge }}</span>
+            }
+          </div>
+
+          <div class="service-footer">
+            <span class="service-category">{{ item.category }}</span>
+            <h2 class="service-name">{{ item.name }}</h2>
+            <span class="service-link-cta">
+              Ver información completa <span>→</span>
+            </span>
+          </div>
+        </a>
+      }
+    </div>
+
+    <!-- Banner de llamada de urgencia -->
+    <div class="cta-banner">
+      <div class="cta-text">
+        <h3>¿Necesita orientación inmediata sobre un servicio?</h3>
+        <p>Estamos atentos a su llamada las 24 horas del día los 365 días del año.</p>
+      </div>
+      <a [href]="'tel:' + phone" class="btn-primary-action">
+        📞 Llamar ahora: {{ phoneFormatted }}
+      </a>
+    </div>
+  </div>
+</section>

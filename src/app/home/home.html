@@ -1,0 +1,157 @@
+@if (isDrawerOpen()) {
+  <div class="drawer-backdrop" (click)="toggleDrawer()"></div>
+}
+
+<main id="inicio">
+  <!-- R01: Ruleta de imágenes / Carrusel Hero -->
+  <section
+    class="hero-carousel"
+    [style.background-image]="'url(' + slides[currentSlide()].image + ')'"
+  >
+    <div class="carousel-overlay"></div>
+
+    <div class="carousel-slide">
+      <div class="carousel-tag">{{ slides[currentSlide()].tag }}</div>
+      <h1>{{ slides[currentSlide()].title }}</h1>
+      <p>{{ slides[currentSlide()].subtitle }}</p>
+      <div class="carousel-actions">
+        <a [href]="'tel:' + phone" class="btn-primary-action">Llamar ahora: {{ phoneFormatted }}</a>
+        <a href="#paquetes" class="btn-secondary-action">Ver Paquetes Funerarios</a>
+      </div>
+    </div>
+
+    <button class="carousel-btn prev" (click)="prevSlide()" aria-label="Anterior">❮</button>
+    <button class="carousel-btn next" (click)="nextSlide()" aria-label="Siguiente">❯</button>
+  </section>
+
+  <!-- R02: Información básica de la empresa -->
+  <section id="empresa" class="section-about">
+    <div class="container text-center">
+      <h2>Funeraria Senderos de Paz</h2>
+      <p class="about-lead">
+        Creada para llevar a nuestros clientes las mejores soluciones en los momentos más impredecibles de nuestras vidas. Contamos con servicios de calidad, y la experiencia de nuestro equipo de profesionales
+      </p>
+      <div class="values-grid">
+        <div class="val-card">
+          <div class="val-icon">⚖️</div>
+          <h4>Trámites y RENIEC</h4>
+          <p>Gestión completa de actas y autorizaciones sanitarias.</p>
+        </div>
+        <div class="val-card">
+          <div class="val-icon">🕊️</div>
+          <h4>Capillas y Velatorios</h4>
+          <p>Espacios privados acondicionados para el recogimiento familiar.</p>
+        </div>
+        <div class="val-card">
+          <div class="val-icon">🚘</div>
+          <h4>Flota Moderna</h4>
+          <p>Carrozas de cortejo panorámicas y transporte de hasta 24 pasajeros.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cuadrícula exclusiva de Paquetes Funerarios -->
+  <section id="paquetes" class="section-packages">
+    <div class="container">
+      <div class="text-center mb-4">
+        <span class="badge-title">Planes Integrales</span>
+        <h2>Nuestros Paquetes Funerarios</h2>
+        <p class="section-lead">
+          Seleccione el paquete de su preferencia para conocer todos sus componentes o coordinarlo de inmediato.
+        </p>
+      </div>
+
+      <div class="packages-grid">
+        @for (item of packages; track item.id) {
+          <a [routerLink]="item.routePath" class="package-card" [attr.aria-label]="item.name">
+            <div class="package-img-wrap">
+              <img [src]="item.image" [alt]="item.name" loading="lazy" />
+              <div class="package-img-overlay"></div>
+              @if (item.badge) {
+                <span class="package-badge">{{ item.badge }}</span>
+              }
+            </div>
+
+            <div class="package-footer">
+              <h3 class="package-name">{{ item.name }}</h3>
+              <span class="package-link-cta">
+                Ver detalle del paquete <span>→</span>
+              </span>
+            </div>
+          </a>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- R03 & R07: Formulario de Contacto -->
+  <section id="contacto" class="section-contact">
+    <div class="container form-max-width">
+      <div class="text-center mb-3">
+        <span class="badge-title">Atención 24 Horas</span>
+        <h2>Formulario de Asistencia y Cotización</h2>
+        <p>Complete sus datos y un asesor se comunicará con usted de forma inmediata.</p>
+      </div>
+
+      <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="contact-card">
+        <input type="hidden" formControlName="selectedPackage" />
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Nombre y Apellidos *</label>
+            <input type="text" formControlName="name" placeholder="Ej. Carlos Mendoza" />
+          </div>
+
+          <div class="form-group">
+            <label>Número Telefónico *</label>
+            <input type="tel" formControlName="phone" placeholder="Ej. 999 888 777" />
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Correo Electrónico *</label>
+            <input type="email" formControlName="email" placeholder="ejemplo@correo.com" />
+          </div>
+
+          <div class="form-group">
+            <label>Tipo de Servicio *</label>
+            <select formControlName="serviceType">
+              <option value="Inmediato (Fallecimiento reciente)">Atención Inmediata (Fallecimiento)</option>
+              <option value="Planificación a Futuro">Planificación / Previsión</option>
+              <option value="Traslado / Trámites">Traslado o Trámites RENIEC</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Mensaje o consulta</label>
+          <textarea formControlName="message" rows="3" placeholder="Indíquenos el hospital, clínica, domicilio o detalles que requiera coordinar..."></textarea>
+        </div>
+
+        @if (contactForm.get('selectedPackage')?.value !== 'General') {
+          <div class="selected-plan-notice">
+            Paquete seleccionado: <strong>{{ contactForm.get('selectedPackage')?.value }}</strong>
+          </div>
+        }
+
+        @if (submitSuccess()) {
+          <div class="alert-success">
+            ✓ Solicitud enviada correctamente. Nos comunicaremos con usted a la brevedad.
+          </div>
+        }
+
+        <button type="submit" class="btn-submit" [disabled]="isSubmitting()">
+          {{ isSubmitting() ? 'Enviando solicitud...' : 'Solicitar Asistencia Inmediata' }}
+        </button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<!-- R04: Botón flotante de WhatsApp -->
+<a [href]="whatsappUrl" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-float" aria-label="Escribir por WhatsApp">
+  <span class="wa-icon">💬</span>
+  <span class="wa-label">WhatsApp 24h</span>
+</a>
