@@ -17,7 +17,7 @@
   z-index: 100;
 }
 
-/* Distribución en 3 columnas iguales para un centrado matemático exacto del logo */
+/* Distribución en 3 columnas iguales para centrado exacto del logo */
 .header-inner {
   max-width: 1200px;
   margin: 0 auto;
@@ -43,46 +43,153 @@
 
 .logo-img {
   justify-self: center;
-  height: 100px;
+  height: 110px;
   width: auto;
   object-fit: contain;
   display: block;
 }
 
-/* Botones de llamadas en la cabecera */
+/* Botón de llamada desplegable */
 .header-call-btns {
   justify-self: end;
   display: flex;
-  gap: 0.5rem;
+  gap: 0.65rem;
   align-items: center;
+}
+
+.call-dropdown-container {
+  position: relative;
 }
 
 .btn-call-header {
   background: var(--primary-navy);
-  color: #fff;
-  padding: 0.6rem 1.1rem;
+  color: #ffffff;
+  padding: 0.6rem 1.2rem;
+  border: none;
   border-radius: 6px;
-  text-decoration: none;
   font-weight: 700;
   font-size: 0.9rem;
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.15s;
 }
 
-.btn-call-secondary {
-  background: transparent;
-  color: var(--primary-navy);
-  border: 1px solid var(--primary-navy);
+.btn-call-header:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-1px);
 }
 
-@media (max-width: 680px) {
-  .btn-call-secondary {
-    display: none; /* Oculta el 2do teléfono en móviles muy angostos para evitar solapamiento */
+.btn-text {
+  display: inline-block;
+}
+
+/* Menú flotante para los 2 números */
+.phone-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(14, 34, 61, 0.15);
+  width: 220px;
+  z-index: 210;
+  overflow: hidden;
+  animation: fadeInDown 0.2s ease-out;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-/* Drawer */
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+  color: var(--primary-dark);
+  border-bottom: 1px solid var(--bg-soft);
+  transition: background 0.2s;
+}
+
+.dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.dropdown-item:hover {
+  background-color: var(--bg-soft);
+}
+
+.item-icon {
+  font-size: 1.1rem;
+}
+
+.item-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-label {
+  font-size: 0.75rem;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.item-number {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--primary-navy);
+}
+
+.dropdown-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: transparent;
+}
+
+/* Botón Flotante Circular de WhatsApp (Home / Global) */
+.btn-whatsapp-float {
+  position: fixed;
+  bottom: 1.75rem;
+  right: 1.75rem;
+  background-color: #25d366;
+  color: #ffffff;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4);
+  z-index: 999;
+  text-decoration: none;
+  transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.wa-icon-svg {
+  width: 30px;
+  height: 30px;
+  fill: #ffffff;
+}
+
+.btn-whatsapp-float:hover {
+  background-color: #20ba5a;
+  transform: scale(1.1) translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.55);
+}
+
+/* Menu Drawer Lateral */
 .drawer {
   position: fixed;
   top: 0;
@@ -131,26 +238,51 @@
 
 .drawer-footer {
   margin-top: auto;
-  padding: 1.5rem 1rem;
+  padding: 1.5rem 1.25rem;
   border-top: 1px solid rgba(255,255,255,0.1);
   font-size: 0.85rem;
   color: #94a3b8;
+}
+
+.drawer-footer p {
+  margin: 0 0 0.75rem 0;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #64748b;
+}
+
+.drawer-contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
 }
 
 .drawer-phone {
   color: var(--accent-gold);
   text-decoration: none;
   font-weight: 700;
+  font-size: 1.05rem;
   display: inline-block;
-  margin-top: 0.25rem;
 }
 
-.drawer-phone-wa {
-  color: #25d366;
+.drawer-wa-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #25d366;
+  color: #ffffff;
+  padding: 0.65rem 1rem;
+  border-radius: 6px;
   text-decoration: none;
   font-weight: 700;
-  display: inline-block;
-  margin-top: 0.25rem;
+  font-size: 0.9rem;
+  transition: background-color 0.2s, transform 0.15s;
+}
+
+.drawer-wa-btn:hover {
+  background-color: #20ba5a;
+  transform: translateY(-1px);
 }
 
 .drawer-backdrop {
@@ -160,9 +292,7 @@
   z-index: 150;
 }
 
-/* ==========================================================================
-   Pie de Página (Footer)
-   ========================================================================== */
+/* Footer */
 .footer {
   background: var(--primary-dark);
   color: #cbd5e1;
@@ -197,27 +327,6 @@
   color: #94a3b8;
   line-height: 1.6;
   margin: 0 0 1.25rem 0;
-}
-
-.badge-guardia {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: rgba(197, 160, 89, 0.15);
-  border: 1px solid var(--accent-gold);
-  color: var(--accent-gold);
-  padding: 0.35rem 0.8rem;
-  border-radius: 999px;
-  font-size: 0.78rem;
-  font-weight: 700;
-}
-
-.dot-green {
-  width: 8px;
-  height: 8px;
-  background-color: #22c55e;
-  border-radius: 50%;
-  box-shadow: 0 0 6px #22c55e;
 }
 
 .footer-col ul {
@@ -314,6 +423,18 @@
   }
 }
 
+@media (max-width: 640px) {
+  .btn-call-header {
+    padding: 0.5rem 0.9rem;
+    font-size: 0.85rem;
+    border-radius: 6px;
+  }
+
+  .logo-img {
+    height: 75px;
+  }
+}
+
 @media (max-width: 550px) {
   .footer-inner {
     grid-template-columns: 1fr;
@@ -321,7 +442,7 @@
   }
 }
 
-/* Redes Sociales con estilo personalizado del sitio */
+/* Redes Sociales */
 .footer-socials {
   margin-top: 1.25rem;
 }
