@@ -28,7 +28,7 @@ export const SERVICES_DATA: Record<string, ServiceDetail> = {
       'plan-mejorado/ataud.png',
       'plan-clasico/capilla.png',
       'plan-clasico/carroza.jpg',
-      'plan-clasico/furgon.jpg'
+      'plan-clasico/furgon.webp'
     ]
   },
   'plan-superior': {
@@ -51,7 +51,7 @@ export const SERVICES_DATA: Record<string, ServiceDetail> = {
       'plan-mejorado/ataud.png',
       'plan-mejorado/carroza.jpg',
       'plan-mejorado/van.jpg',
-      'plan-clasico/furgon.jpg'
+      'plan-clasico/furgon.webp'
     ]
   },
   'plan-mejorado': {
@@ -76,7 +76,7 @@ export const SERVICES_DATA: Record<string, ServiceDetail> = {
       'plan-mejorado/carroza.jpg',
       'plan-mejorado/van.jpg',
       'plan-superior/cargadores.jpg',
-      'plan-clasico/furgon.jpg'
+      'plan-clasico/furgon.webp'
     ]
   },
   'plan-premium': {
@@ -98,7 +98,7 @@ export const SERVICES_DATA: Record<string, ServiceDetail> = {
     ],
     gallery: [
       'plan-premium/ataud.jpg',
-      'plan-clasico/furgon.jpg',
+      'plan-clasico/furgon.webp',
       'plan-vip/coaster.jpg',
       'plan-superior/cargadores.jpg',
       'plan-mejorado/carroza.jpg'
@@ -126,7 +126,7 @@ export const SERVICES_DATA: Record<string, ServiceDetail> = {
       'plan-vip/ataud.jpg',
       'plan-vip/coaster.jpg',
       'plan-mejorado/van.jpg',
-      'plan-clasico/furgon.jpg',
+      'plan-clasico/furgon.webp',
       'plan-mejorado/carroza.jpg',
       'plan-superior/cargadores.jpg'
     ]
