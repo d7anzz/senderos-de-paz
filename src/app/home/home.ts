@@ -1,7 +1,6 @@
-import { Component, signal, inject, OnInit } from '@angular/core';
+import { Component, signal, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { RouterLink } from '@angular/router';
 
 export interface PlanItem {
@@ -20,18 +19,18 @@ export interface PlanItem {
   styleUrls: ['./home.css']
 })
 export class HomeComponent implements OnInit {
-  private fb = inject(FormBuilder);
-  private http = inject(HttpClient);
+  private fb = FormBuilder.prototype ? new FormBuilder() : null; // Inyección o fb simple
 
   readonly phone = '+51936749441';
   readonly phoneFormatted = '936 749 441';
+  readonly whatsappPhone = '51936749441'; // Número en formato internacional sin el '+'
   readonly whatsappUrl = 'https://wa.me/51936749441?text=Hola,%20deseo%20asistencia%20inmediata%20de%20Funeraria%20Senderos%20de%20Paz';
 
   isDrawerOpen = signal(false);
 
   slides = [
     {
-      image: '/slide-1.jpg',
+      image: '/asistencia-emocional.jpg',
       title: 'Acompañamiento en Momentos Difíciles',
       subtitle: 'Atención respetuosa y apoyo integral las 24 horas del día.',
       tag: 'Guardia Permanente'
@@ -43,7 +42,7 @@ export class HomeComponent implements OnInit {
       tag: 'Infraestructura Propia'
     },
     {
-      image: '/slide-3.jpg',
+      image: '/paquete-vip.jpg',
       title: 'Trámites Integrales y RENIEC',
       subtitle: 'Nos encargamos de todas las gestiones legales y sanitarias por su familia.',
       tag: 'Tranquilidad Absoluta'
@@ -51,7 +50,6 @@ export class HomeComponent implements OnInit {
   ];
   currentSlide = signal(0);
 
-  // Únicamente los 5 paquetes funerarios
   packages: PlanItem[] = [
     {
       id: 'plan-clasico',
@@ -87,14 +85,18 @@ export class HomeComponent implements OnInit {
     }
   ];
 
-  contactForm: FormGroup = this.fb.group({
-    name: ['', [Validators.required, Validators.minLength(3)]],
-    phone: ['', [Validators.required, Validators.pattern(/^[0-9+ ]{8,15}$/)]],
-    email: ['', [Validators.required, Validators.email]],
-    serviceType: ['Inmediato (Fallecimiento reciente)', Validators.required],
-    message: [''],
-    selectedPackage: ['General']
-  });
+  contactForm: FormGroup;
+
+  constructor(private formBuilder: FormBuilder) {
+    this.contactForm = this.formBuilder.group({
+      name: ['', [Validators.required, Validators.minLength(3)]],
+      phone: ['', [Validators.required, Validators.pattern(/^[0-9+ ]{8,15}$/)]],
+      email: ['', [Validators.email]],
+      serviceType: ['Inmediato (Fallecimiento reciente)', Validators.required],
+      message: [''],
+      selectedPackage: ['General']
+    });
+  }
 
   isSubmitting = signal(false);
   submitSuccess = signal(false);
@@ -132,20 +134,37 @@ export class HomeComponent implements OnInit {
       return;
     }
 
-    this.isSubmitting.set(true);
+    const { name, phone, email, serviceType, message, selectedPackage } = this.contactForm.value;
 
-    this.http.post('/api/cotizar', this.contactForm.value).subscribe({
-      next: () => {
-        this.isSubmitting.set(false);
-        this.submitSuccess.set(true);
-        this.contactForm.reset({
-          serviceType: 'Inmediato (Fallecimiento reciente)',
-          selectedPackage: 'General'
-        });
-      },
-      error: () => {
-        this.isSubmitting.set(false);
-      }
+    // Construcción del mensaje preformateado para WhatsApp
+    let mensajeWA = `*Solicitud de Asistencia - Senderos de Paz*\n\n` +
+                    `👤 *Nombre:* ${name}\n` +
+                    `📞 *Teléfono:* ${phone}\n`;
+
+    if (email) {
+      mensajeWA += `✉️ *Correo:* ${email}\n`;
+    }
+
+    mensajeWA += `📋 *Tipo de servicio:* ${serviceType}\n`;
+
+    if (selectedPackage && selectedPackage !== 'General') {
+      mensajeWA += `📦 *Paquete de Interés:* ${selectedPackage}\n`;
+    }
+
+    if (message) {
+      mensajeWA += `💬 *Consulta:* ${message}\n`;
+    }
+
+    // Codificación de URL para WhatsApp
+    const url = `https://wa.me/${this.whatsappPhone}?text=${encodeURIComponent(mensajeWA)}`;
+
+    // Abrir chat de WhatsApp en pestaña nueva
+    window.open(url, '_blank');
+
+    this.submitSuccess.set(true);
+    this.contactForm.reset({
+      serviceType: 'Inmediato (Fallecimiento reciente)',
+      selectedPackage: 'General'
     });
   }
 }

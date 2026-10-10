@@ -3,7 +3,6 @@
   <div class="header-inner">
     <button class="btn-menu" (click)="toggleDrawer()" aria-label="Abrir menú de navegación">
       <span class="menu-icon">☰</span>
-      <span class="menu-label">Menú</span>
     </button>
 
     <a routerLink="/" class="logo-link">
@@ -11,8 +10,7 @@
     </a>
 
     <a [href]="'tel:' + phone" class="btn-call-header">
-      <span class="call-icon">📞</span>
-      <span class="call-text">Llamar 24/7</span>
+      <span class="call-text">Llamar</span>
     </a>
   </div>
 </header>
@@ -25,17 +23,79 @@
   </div>
   <nav class="drawer-nav">
     <a routerLink="/" (click)="toggleDrawer()">Inicio</a>
-    <a routerLink="/about" (click)="toggleDrawer()">Sobre la Empresa</a>
+    <a routerLink="/about" (click)="toggleDrawer()">Sobre Nosotros</a>
     <a routerLink="/services" (click)="toggleDrawer()">Nuestros Servicios</a>
     <a routerLink="/" fragment="contacto" (click)="toggleDrawer()">Formulario de Contacto</a>
-    <div class="drawer-footer">
-      <p>Atención continua los 365 días del año</p>
-      <a [href]="'tel:' + phone" class="drawer-phone">📞 {{ phoneFormatted }}</a>
-    </div>
   </nav>
 </aside>
 
 @if (isDrawerOpen()) {
   <div class="drawer-backdrop" (click)="toggleDrawer()"></div>
 }
+
 <router-outlet />
+
+<!-- Pie de Página Global (Footer) -->
+<footer class="footer">
+  <div class="footer-inner">
+
+    <!-- Columna 1: Info -->
+    <div class="footer-col brand-col">
+      <h3 class="footer-title">Senderos de Paz</h3>
+      <p class="footer-desc">
+        Servicios funerarios integrales con atención cálida, respetuosa y oportuna las 24 horas del día.
+      </p>
+    </div>
+
+    <!-- Columna 2: Navegación -->
+    <div class="footer-col">
+      <h4>Navegación</h4>
+      <ul>
+        <li><a routerLink="/">Inicio</a></li>
+        <li><a routerLink="/about">Sobre Nosotros</a></li>
+        <li><a routerLink="/services">Nuestros Servicios</a></li>
+      </ul>
+    </div>
+
+    <!-- Columna 3: Servicios -->
+    <div class="footer-col">
+      <h4>Servicios</h4>
+      <ul>
+        <li><a routerLink="/servicios/traslados-nacionales">Traslados Nacionales</a></li>
+        <li><a routerLink="/servicios/traslados-internacionales">Repatriaciones</a></li>
+        <li><a routerLink="/servicios/exhumaciones">Exhumaciones</a></li>
+        <li><a routerLink="/servicios/asistencia-duelo">Apoyo Emocional</a></li>
+      </ul>
+    </div>
+
+    <!-- Columna 4: Atención -->
+    <div class="footer-col">
+  <h4>Atención Inmediata</h4>
+  <p class="footer-contact-item">
+    <strong>Teléfono 24 Horas:</strong><br />
+    <a [href]="'tel:' + phone" class="footer-link-gold">{{ phoneFormatted }}</a>
+  </p>
+
+  <div class="footer-location-box">
+  <strong>Ubicación:</strong>
+  <p class="location-address">Jirón Bolivar 441, Lurín, Lima, Perú</p>
+
+  <div class="map-iframe-container">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1015.6768558709712!2d-76.86743528566498!3d-12.273059826158082!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105bd1c1171d3dd%3A0x102a343c080cc7c8!2zSmlyw7NuIEJvbMOtdmFyIDQ0MSwgTHVyw61uIDE1ODIz!5e0!3m2!1ses-419!2spe!4v1791659973539!5m2!1ses-419!2spe"
+      width="100%"
+      height="120"
+      style="border:0;"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</div>
+</div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© Senderos de Paz. Todos los derechos reservados.</p>
+  </div>
+</footer>

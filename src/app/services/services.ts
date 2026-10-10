@@ -66,28 +66,28 @@ export class ServicesComponent {
       id: 'traslado-nacional',
       name: 'Traslados al Interior del País',
       category: 'Servicio Especializado',
-      image: '/servicios/traslado-nacional.webp',
+      image: '/traslados-interior.jpg',
       routePath: '/servicios/traslados-nacionales'
     },
     {
       id: 'traslado-internacional',
       name: 'Repatriación y Traslados al Exterior',
       category: 'Servicio Especializado',
-      image: '/servicios/traslado-internacional.webp',
+      image: '/traslados-exterior.jpg',
       routePath: '/servicios/traslados-internacionales'
     },
     {
       id: 'exhumaciones',
       name: 'Servicio de Exhumaciones y Traslado de Restos',
       category: 'Servicio Especializado',
-      image: '/servicios/exhumaciones.webp',
+      image: '/exhumacion.webp',
       routePath: '/servicios/exhumaciones'
     },
     {
       id: 'apoyo-duelo',
       name: 'Asistencia Emocional y Manejo de Duelo',
       category: 'Servicio Especializado',
-      image: '/servicios/apoyo-duelo.webp',
+      image: '/asistencia-emocional.jpg',
       routePath: '/servicios/asistencia-duelo'
     }
   ];

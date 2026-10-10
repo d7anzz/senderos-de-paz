@@ -126,3 +126,210 @@
   background: rgba(0,0,0,0.5);
   z-index: 150;
 }
+
+/* ==========================================================================
+   Pie de Página (Footer)
+   ========================================================================== */
+.footer {
+  background: var(--primary-dark);
+  color: #cbd5e1;
+  font-size: 0.9rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3.5rem 1.25rem 2.5rem;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: 2.5rem;
+}
+
+.footer-col h4 {
+  color: #ffffff;
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0 0 1.2rem 0;
+}
+
+.footer-title {
+  color: #ffffff;
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin: 0 0 0.75rem 0;
+}
+
+.footer-desc {
+  color: #94a3b8;
+  line-height: 1.6;
+  margin: 0 0 1.25rem 0;
+}
+
+.badge-guardia {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(197, 160, 89, 0.15);
+  border: 1px solid var(--accent-gold);
+  color: var(--accent-gold);
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.dot-green {
+  width: 8px;
+  height: 8px;
+  background-color: #22c55e;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #22c55e;
+}
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.footer-col a {
+  color: #94a3b8;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-col a:hover {
+  color: var(--accent-gold);
+}
+
+.footer-contact-item {
+  margin: 0 0 0.85rem 0;
+  line-height: 1.4;
+  color: #94a3b8;
+}
+
+.footer-contact-item strong {
+  color: #ffffff;
+}
+
+.footer-link-gold {
+  color: var(--accent-gold) !important;
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.footer-bottom {
+  background: rgba(0, 0, 0, 0.25);
+  padding: 1.25rem 1rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #64748b;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-bottom p {
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .footer-inner {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 550px) {
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+/* Mini Mapa Interactivo en Footer */
+.footer-location-box {
+  margin-top: 0.5rem;
+}
+
+.location-address {
+  margin: 0.25rem 0 0.75rem 0;
+  font-size: 0.88rem;
+  color: #94a3b8;
+}
+
+.mini-map-card {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 110px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(197, 160, 89, 0.4);
+  /* Imagen/Textura simulando cuadrícula de mapa */
+  background:
+    linear-gradient(135deg, rgba(14, 34, 61, 0.7) 0%, rgba(22, 55, 99, 0.85) 100%),
+    radial-gradient(circle at 50% 50%, #2c4a7c 10%, transparent 11%),
+    #163763;
+  background-size: cover, 16px 16px, auto;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.mini-map-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent-gold);
+  box-shadow: 0 6px 18px rgba(197, 160, 89, 0.25);
+}
+
+.map-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  background: rgba(14, 34, 61, 0.4);
+  transition: background 0.2s ease;
+}
+
+.mini-map-card:hover .map-overlay {
+  background: rgba(14, 34, 61, 0.15);
+}
+
+.map-pin-icon {
+  font-size: 1.6rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+  animation: bouncePin 2s infinite ease-in-out;
+}
+
+.map-btn-text {
+  color: #ffffff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  background: rgba(14, 34, 61, 0.85);
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid var(--accent-gold);
+  letter-spacing: 0.3px;
+}
+
+@keyframes bouncePin {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.map-iframe-container {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--accent-gold);
+  margin-top: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.map-iframe-container iframe {
+  display: block;
+}
