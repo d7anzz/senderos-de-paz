@@ -123,7 +123,7 @@ export const SERVICES_DATA: Record<string, ServiceDetail> = {
       'Preparación tanatológica'
     ],
     gallery: [
-      'plan-vip/ataud.jpg',
+      'plan-vip/ataud.jpeg',
       'plan-vip/coaster.jpg',
       'plan-mejorado/van.jpg',
       'plan-clasico/furgon.png',
@@ -145,6 +145,9 @@ export const SERVICES_DATA: Record<string, ServiceDetail> = {
     'Unidad de transporte fúnebre acondicionada a nivel nacional',
     'Coordinación directa con funerarias y cementerios de destino',
     'Acompañamiento y orientación a los familiares durante el trayecto'
+  ],
+  gallery: [
+    '/traslados-interior.jpg'
   ]
 },
 'traslados-internacionales': {
@@ -159,6 +162,9 @@ export const SERVICES_DATA: Record<string, ServiceDetail> = {
     'Cofre o ataúd hermético especial para transporte aéreo',
     'Embalaje de exportación bajo reglamentación IATA',
     'Coordinación logística con aerolíneas'
+  ],
+  gallery: [
+    '/traslados-exterior.jpg'
   ]
 },
 'exhumaciones': {
@@ -173,6 +179,9 @@ export const SERVICES_DATA: Record<string, ServiceDetail> = {
     'Personal técnico especializado y equipo de protección',
     'Urna o cofre para reducción de restos',
     'Traslado al nuevo destino o crematorio'
+  ],
+  gallery: [
+    '/exhumacion.webp'
   ]
 },
 'asistencia-duelo': {
@@ -186,6 +195,9 @@ export const SERVICES_DATA: Record<string, ServiceDetail> = {
     'Guía y material de apoyo para el proceso de duelo',
     'Atención personalizada por profesionales en tanatología',
     'Acompañamiento en momentos críticos y homenajes'
+  ],
+  gallery: [
+    '/asistencia-emocional.jpg'
   ]
 }
 };

@@ -1,4 +1,4 @@
-import { Component, signal, OnInit } from '@angular/core';
+import { Component, signal, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -18,13 +18,17 @@ export interface PlanItem {
   templateUrl: './home.html',
   styleUrls: ['./home.css']
 })
-export class HomeComponent implements OnInit {
-  private fb = FormBuilder.prototype ? new FormBuilder() : null; // Inyección o fb simple
+export class HomeComponent implements OnInit, OnDestroy {
+  // Teléfonos para Llamadas Directas
+  readonly phone1 = '+51936749441';
+  readonly phone1Formatted = '936 749 441';
 
-  readonly phone = '+51936749441';
-  readonly phoneFormatted = '936 749 441';
-  readonly whatsappPhone = '51936749441'; // Número en formato internacional sin el '+'
-  readonly whatsappUrl = 'https://wa.me/51936749441?text=Hola,%20deseo%20asistencia%20inmediata%20de%20Funeraria%20Senderos%20de%20Paz';
+  readonly phone2 = '+51987654321'; // <-- Reemplaza por tu segundo número de llamadas
+  readonly phone2Formatted = '987 654 321';
+
+  // Número Exclusivo para WhatsApp
+  readonly whatsappPhone = '51936749441'; // Solo WhatsApp (sin el +)
+  readonly whatsappUrl = `https://wa.me/${this.whatsappPhone}?text=Hola,%20deseo%20asistencia%20inmediata%20de%20Funeraria%20Senderos%20de%20Paz`;
 
   isDrawerOpen = signal(false);
 
@@ -49,6 +53,7 @@ export class HomeComponent implements OnInit {
     }
   ];
   currentSlide = signal(0);
+  private carouselInterval: any;
 
   packages: PlanItem[] = [
     {
@@ -103,6 +108,25 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.preloadImages();
+    this.startAutoSlide();
+  }
+
+  ngOnDestroy(): void {
+    this.stopAutoSlide();
+  }
+
+  private startAutoSlide(): void {
+    if (typeof window !== 'undefined') {
+      this.carouselInterval = setInterval(() => {
+        this.nextSlide();
+      }, 5000); // Rotación cada 5 segundos
+    }
+  }
+
+  private stopAutoSlide(): void {
+    if (this.carouselInterval) {
+      clearInterval(this.carouselInterval);
+    }
   }
 
   private preloadImages(): void {
@@ -124,10 +148,6 @@ export class HomeComponent implements OnInit {
     this.currentSlide.update((i) => (i + 1) % this.slides.length);
   }
 
-  prevSlide(): void {
-    this.currentSlide.update((i) => (i - 1 + this.slides.length) % this.slides.length);
-  }
-
   onSubmit(): void {
     if (this.contactForm.invalid) {
       this.contactForm.markAllAsTouched();
@@ -136,7 +156,6 @@ export class HomeComponent implements OnInit {
 
     const { name, phone, email, serviceType, message, selectedPackage } = this.contactForm.value;
 
-    // Construcción del mensaje preformateado para WhatsApp
     let mensajeWA = `*Solicitud de Asistencia - Senderos de Paz*\n\n` +
                     `👤 *Nombre:* ${name}\n` +
                     `📞 *Teléfono:* ${phone}\n`;
@@ -155,10 +174,8 @@ export class HomeComponent implements OnInit {
       mensajeWA += `💬 *Consulta:* ${message}\n`;
     }
 
-    // Codificación de URL para WhatsApp
     const url = `https://wa.me/${this.whatsappPhone}?text=${encodeURIComponent(mensajeWA)}`;
 
-    // Abrir chat de WhatsApp en pestaña nueva
     window.open(url, '_blank');
 
     this.submitSuccess.set(true);

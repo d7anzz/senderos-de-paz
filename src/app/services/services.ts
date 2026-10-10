@@ -19,8 +19,8 @@ export interface ServiceItem {
   styleUrl: './services.css'
 })
 export class ServicesComponent {
-  readonly phone = '+51936749441';
-  readonly phoneFormatted = '936 749 441';
+  readonly phone = '+51978010265';
+  readonly phoneFormatted = '978010265';
 
   services: ServiceItem[] = [
     // Paquetes funerarios

@@ -15,7 +15,7 @@ export const routes: Routes = [
   {
     path: 'about',
     component: AboutComponent,
-    title: 'Sobre la Empresa | Senderos de Paz'
+    title: 'Sobre Nosotros | Senderos de Paz'
   },
   {
     path: 'services',

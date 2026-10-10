@@ -6,10 +6,47 @@
   </header>
 
   <div class="container content-wrapper">
-    <!-- Grid principal: 2 columnas (Detalles a la izquierda, Galería a la derecha) -->
     <div class="detail-main-grid">
 
-      <!-- Columna Izquierda: Lista de lo que incluye -->
+      <!-- Columna Galería -->
+      <div class="detail-gallery-wrapper">
+        @if (service.gallery && service.gallery.length > 0) {
+          <!-- 1. Tarjeta Única para la Imagen Principal -->
+          <div class="detail-gallery-card">
+            <div class="carousel-main-slide">
+              <img [src]="service.gallery[currentImageIndex]" [alt]="service.name" />
+
+              @if (service.gallery.length > 1) {
+                <button type="button" class="carousel-btn prev" (click)="prevImage(service.gallery)" aria-label="Anterior">❮</button>
+                <button type="button" class="carousel-btn next" (click)="nextImage(service.gallery)" aria-label="Siguiente">❯</button>
+              }
+            </div>
+          </div>
+
+          <!-- 2. Miniaturas AFUERA de la tarjeta principal -->
+          @if (service.gallery.length > 1) {
+            <div class="carousel-thumbnails-outer">
+              @for (img of service.gallery; track $index) {
+                <button
+                  type="button"
+                  class="thumb-btn"
+                  [class.active]="$index === currentImageIndex"
+                  (click)="selectImage($index)">
+                  <img [src]="img" [alt]="'Vista ' + ($index + 1)" />
+                </button>
+              }
+            </div>
+          }
+        } @else {
+          <div class="detail-gallery-card">
+            <div class="gallery-placeholder">
+              <img [src]="service.image" [alt]="service.name" />
+            </div>
+          </div>
+        }
+      </div>
+
+      <!-- Columna Especificaciones -->
       <div class="detail-info-card">
         <h2>¿Qué incluye este paquete?</h2>
         <ul class="features-list">
@@ -22,44 +59,9 @@
         </ul>
       </div>
 
-      <!-- Columna Derecha: Carrusel de fotos -->
-      <div class="detail-gallery-card">
-        @if (service.gallery && service.gallery.length > 0) {
-          <div class="carousel-container">
-            <div class="carousel-main-slide">
-              <img [src]="service.gallery[currentImageIndex]" [alt]="service.name" />
-
-              @if (service.gallery.length > 1) {
-                <button type="button" class="carousel-btn prev" (click)="prevImage(service.gallery)" aria-label="Anterior">❮</button>
-                <button type="button" class="carousel-btn next" (click)="nextImage(service.gallery)" aria-label="Siguiente">❯</button>
-              }
-            </div>
-
-            @if (service.gallery.length > 1) {
-              <div class="carousel-thumbnails">
-                @for (img of service.gallery; track $index) {
-                  <button
-                    type="button"
-                    class="thumb-btn"
-                    [class.active]="$index === currentImageIndex"
-                    (click)="selectImage($index)">
-                    <img [src]="img" [alt]="'Vista ' + ($index + 1)" />
-                  </button>
-                }
-              </div>
-            }
-          </div>
-        } @else {
-          <!-- Fallback si el servicio aún no tiene fotos en el arreglo -->
-          <div class="gallery-placeholder">
-            <img [src]="service.image" [alt]="service.name" />
-          </div>
-        }
-      </div>
-
     </div>
 
-    <!-- Banner Inferior: Contacto / Llamada a la acción -->
+    <!-- Banner Inferior de Contacto -->
     <div class="cta-banner">
       <div class="cta-text">
         <h3>¿Necesita orientación o contratar este plan?</h3>
