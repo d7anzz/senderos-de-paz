@@ -1,5 +1,5 @@
-import { Component, signal, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, signal, OnInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
@@ -18,16 +18,16 @@ export interface PlanItem {
   templateUrl: './home.html',
   styleUrls: ['./home.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   // Teléfonos para Llamadas Directas
   readonly phone1 = '+51936749441';
   readonly phone1Formatted = '936 749 441';
 
-  readonly phone2 = '+51995539873'; // <-- Agrega aquí tu segundo número
+  readonly phone2 = '+51995539873';
   readonly phone2Formatted = '995 539 873';
 
   // Número Exclusivo para WhatsApp
-  readonly whatsappPhone = '51978010265'; // Solo WhatsApp (sin el +)
+  readonly whatsappPhone = '51978010265';
   readonly whatsappUrl = `https://wa.me/${this.whatsappPhone}?text=Hola,%20deseo%20asistencia%20inmediata%20de%20Funeraria%20Senderos%20de%20Paz`;
 
   isDrawerOpen = signal(false);
@@ -53,6 +53,7 @@ export class HomeComponent implements OnInit {
     }
   ];
   currentSlide = signal(0);
+  private carouselInterval: any;
 
   packages: PlanItem[] = [
     {
@@ -91,7 +92,10 @@ export class HomeComponent implements OnInit {
 
   contactForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
     this.contactForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
       phone: ['', [Validators.required, Validators.pattern(/^[0-9+ ]{8,15}$/)]],
@@ -107,10 +111,29 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.preloadImages();
+    this.startAutoPlay();
+  }
+
+  ngOnDestroy(): void {
+    this.stopAutoPlay();
+  }
+
+  private startAutoPlay(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      this.carouselInterval = setInterval(() => {
+        this.nextSlide();
+      }, 5000); // Cambia cada 5 segundos (5000 ms)
+    }
+  }
+
+  private stopAutoPlay(): void {
+    if (this.carouselInterval) {
+      clearInterval(this.carouselInterval);
+    }
   }
 
   private preloadImages(): void {
-    if (typeof window !== 'undefined') {
+    if (isPlatformBrowser(this.platformId)) {
       this.slides.forEach((slide) => {
         if (slide.image) {
           const img = new Image();
